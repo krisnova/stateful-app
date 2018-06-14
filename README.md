@@ -1,34 +1,33 @@
-# Welcome to Buffalo!
+<p align="center"><img src="diagram.png" width="700"></p>
 
-Thank you for choosing Buffalo for your web development needs.
+# Welcome to the Kris Nova Stateful Application!
 
-## Database Setup
+### Deploying the application:
 
-It looks like you chose to set up your application using a postgres database! Fantastic!
+```bash
+kubectl create -f manifests/
+```
 
-The first thing you need to do is open up the "database.yml" file and edit it to use the correct usernames, passwords, hosts, etc... that are appropriate for your environment.
+### Delete the application
 
-You will also need to make sure that **you** start/install the database of your choice. Buffalo **won't** install and start postgres for you.
+```bash
+kubectl delete -f manifests
+```
 
-### Create Your Databases
+### Update docker registry with a new build
 
-Ok, so you've edited the "database.yml" file and started postgres, now Buffalo can create the databases in that file for you:
+```bash
+make container push
+```
 
-	$ buffalo db create -a
-## Starting the Application
+### Get the public address
 
-Buffalo ships with a command that will watch your application and automatically rebuild the Go binary and any assets for you. To do that run the "buffalo dev" command:
+```bash
+k get svc -owide | grep statefulapp-service | cut -d " " -f 16
+```
 
-	$ buffalo dev
+### Create database in server
 
-If you point your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000) you should see a "Welcome to Buffalo!" page.
-
-**Congratulations!** You now have your Buffalo application up and running.
-
-## What Next?
-
-We recommend you heading over to [http://gobuffalo.io](http://gobuffalo.io) and reviewing all of the great documentation there.
-
-Good luck!
-
-[Powered by Buffalo](http://gobuffalo.io)
+```bash
+k exec -it $(k get po | grep postgres | cut -d " " -f 1) -- bash -c "psql -c 'CREATE DATABASE stateful_app_development;' -U postgres"
+```

@@ -1,0 +1,6 @@
+- id: "state.created.success"
+  translation: "State was successfully created."
+- id: "state.updated.success"
+  translation: "State was successfully updated."
+- id: "state.destroyed.success"
+  translation: "State was successfully destroyed."

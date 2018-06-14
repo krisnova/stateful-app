@@ -1,0 +1,6 @@
+create_table("states", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("content", "text", {})
+	t.Column("first", "string", {})
+	t.Column("last", "string", {})
+})

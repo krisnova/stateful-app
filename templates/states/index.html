@@ -1,0 +1,51 @@
+<%= if (current_user){ %>
+<div class="page-header">
+  <h1>Stateful Data:</h1>
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+  <th>Known GitHub Users</th>
+  <th>Created At</th>
+  <th></th>
+  </thead>
+  <tbody>
+    <%= for (state) in states { %>
+      <tr>
+      <td><%= state.First %></td>
+          <td><%= state.CreatedAt %></td>
+        <td>
+          <div class="pull-right">
+            <a href="<%= statePath({ state_id: state.ID }) %>" class="btn btn-info">View</a>
+            <a href="<%= editStatePath({ state_id: state.ID }) %>" class="btn btn-warning">Edit</a>
+            <a href="<%= stateDeletePath({ state_id: state.ID }) %>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+          </div>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+<% } %>
+
+<div class="text-center">
+  <%= paginator(pagination) %>
+</div>
+
+<%= if (current_user){ %>
+<%= form_for(state, {action: statesPath(), method: "POST"}) { %>
+<%= partial("states/form.html") %>
+<a href="<%= statesPath() %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>
+<% } else { %>
+
+<center>
+    <br>
+    Authenticate to continue...
+    <br>
+    <br>
+    <a href="/auth/github" class="btn btn-primary">Log in with GitHub</a>
+
+</center>
+<% } %>
+

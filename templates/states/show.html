@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1>State#Show</h1>
+</div>
+
+<ul class="list-unstyled list-inline">
+  <li><a href="<%= statesPath() %>" class="btn btn-info">Back to all States</a></li>
+  <li><a href="<%= editStatePath({ state_id: state.ID })%>" class="btn btn-warning">Edit</a></li>
+  <li><a href="<%= statePath({ state_id: state.ID })%>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+</ul>
+
+<p>
+  <strong>Content</strong>: <%= state.Content %>
+</p>
+<p>
+  <strong>First</strong>: <%= state.First %>
+</p>
+<p>
+  <strong>Last</strong>: <%= state.Last %>
+</p>

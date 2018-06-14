@@ -7,10 +7,11 @@ import (
 	"github.com/gobuffalo/envy"
 	"github.com/unrolled/secure"
 
-	"github.com/gobuffalo/buffalo/middleware/csrf"
 	"github.com/gobuffalo/buffalo/middleware/i18n"
 	"github.com/gobuffalo/packr"
 	"github.com/kris-nova/stateful_app/models"
+
+	"github.com/markbates/goth/gothic"
 )
 
 // ENV is used to help switch settings based on where the
@@ -40,7 +41,7 @@ func App() *buffalo.App {
 
 		// Protect against CSRF attacks. https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
 		// Remove to disable this.
-		app.Use(csrf.New)
+		//app.Use(csrf.New)
 
 		// Wraps each request in a transaction.
 		//  c.Value("tx").(*pop.PopTransaction)
@@ -54,8 +55,21 @@ func App() *buffalo.App {
 		}
 		app.Use(T.Middleware())
 
-		app.GET("/", HomeHandler)
+		app.Use(SetCurrentUser)
+		app.Use(Authorize)
 
+		states := StatesResource{}
+		app.GET("/", states.List)
+		stateResource := app.Resource("/states", states)
+		stateResource.GET("/delete", states.Destroy)
+
+		app.Middleware.Skip(Authorize, states.List)
+		auth := app.Group("/auth")
+		bah := buffalo.WrapHandlerFunc(gothic.BeginAuthHandler)
+		auth.GET("/{provider}", bah)
+		auth.GET("/{provider}/callback", AuthCallback)
+		auth.DELETE("", AuthDestroy)
+		auth.Middleware.Skip(Authorize, bah, AuthCallback)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

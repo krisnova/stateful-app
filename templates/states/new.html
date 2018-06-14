@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>New State</h1>
+</div>
+
+<%= form_for(state, {action: statesPath(), method: "POST"}) { %>
+  <%= partial("states/form.html") %>
+  <a href="<%= statesPath() %>" class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+<% } %>

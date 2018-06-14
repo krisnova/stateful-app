@@ -2,19 +2,169 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Buffalo - Stateful App</title>
+    <title>Kris Nova - Stateful App</title>
     <%= stylesheetTag("application.css") %>
-    <meta name="csrf-param" content="authenticity_token" />
-    <meta name="csrf-token" content="<%= authenticity_token %>" />
-    <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
+    <link rel="icon" href="<%= assetPath("images/favicon.png") %>">
+      <!-- Place this tag in your head or just before your close body tag. -->
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
 
-    <div class="container">
+  <style media="screen">
+      * {
+          -webkit-transition: all .38s;
+          /* Safari */
+          transition: all .38s;
+      }
+
+      .container {
+          min-width: 320px;
+      }
+
+      header {
+          background-color: #62a5ee;
+          padding: 10px 20px;
+          box-sizing: border-box;
+      }
+
+      .logo img {
+          width: 80px;
+      }
+
+      .titles h1 {
+          font-size: 30px;
+          font-weight: 300;
+          color: white;
+          margin-bottom: 13px;
+          margin-top: 5px;
+      }
+
+      .titles h2 {
+          font-weight: 300;
+          font-size: 18px;
+          display: inline-block;
+          margin: 0;
+      }
+
+      .titles a {
+          color: white;
+          text-decoration: underline;
+      }
+
+      .titles i {
+          margin-right: 5px;
+          text-decoration: none;
+      }
+
+      .titles .documentation {
+          margin-left: 28px;
+      }
+
+      .subtitle {
+          color: white;
+          margin: 0;
+          padding: 13px 0;
+          background-color: #2a3543;
+          margin-bottom: 20px;
+      }
+
+      .subtitle h3 {
+          font-size: 22px;
+          font-weight: 400;
+          margin: 0;
+      }
+
+      table {
+          font-size: 14px;
+      }
+
+      table.table tbody tr td {
+          border-top: 0;
+          padding: 10px;
+      }
+
+      .foot {
+          text-align: right;
+          text-align: right;
+          color: #c5c5c5;
+          font-weight: 300;
+      }
+
+      .foot a {
+          color: #8b8b8b;
+          text-decoration: underline;
+      }
+
+      .centered {
+          text-align: center;
+      }
+
+      @media all and (max-width: 770px) {
+          .titles h1 {
+              font-size: 25px;
+              margin: 15px 0 5px 0;
+          }
+      }
+
+      @media all and (max-width: 640px) {
+          .titles h1 {
+              font-size: 23px;
+              margin: 15px 0 5px 0;
+          }
+          .titles h2 {
+              font-size: 15px;
+          }
+          .titles .documentation {
+              margin-left: 10px;
+          }
+      }
+
+      @media all and (max-width: 530px) {
+          .titles h1 {
+              font-size: 20px;
+              margin: 5px 0;
+          }
+          .logo {
+              padding: 0
+          }
+          .logo img {
+              width: 100%
+          }
+          .titles .documentation {
+              margin-left: 0px;
+              margin-top: 5px;
+              display: block;
+          }
+      }
+  </style>
+
+  <header>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-1 col-sm-2 col-xs-2 logo">
+                  <a href="<%= rootPath() %>"><img src="<%= rootPath() %>assets/images/kubicorn-trans.png" alt=""></a>
+              </div>
+              <div class="col-md-9 col-sm-9 col-xs-10 titles">
+                  <h1> Demo Stateful Application [v0.0.1]</h1>
+                  <!-- Place this tag where you want the button to render. -->
+                  <a class="github-button" href="https://github.com/kris-nova" data-size="large" data-show-count="true" aria-label="Follow @kris-nova on GitHub">Follow @kris-nova</a>
+                  <a href="https://twitter.com/krisnova?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-show-count="true">Follow @krisnova</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              </div>
+          </div>
+      </div>
+
+  </header>
+
+
+  <div class="container">
       <%= partial("flash.html") %>
       <%= yield %>
     </div>
 
     <%= javascriptTag("application.js") %>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>
