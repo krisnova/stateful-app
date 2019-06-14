@@ -2,7 +2,7 @@ ifndef VERBOSE
 	MAKEFLAGS += --silent
 endif
 
-TARGET = stateful_app
+TARGET = stateful-app
 GOTARGET = github.com/kubicorn/$(TARGET)
 REGISTRY ?= krisnova
 IMAGE = $(REGISTRY)/$(TARGET)
@@ -40,7 +40,7 @@ run: ## Run the program
 	$(DOCKER) run $(REGISTRY)/$(TARGET):$(IMAGE_VERSION)
 
 
-compile: ## Compile the binary into bin/stateful_app
+compile: ## Compile the binary into bin/stateful-app
 	go build -o bin/state_app main.go
 
 install: ## Install the app
